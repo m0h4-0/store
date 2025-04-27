@@ -1,0 +1,130 @@
+@font-face {
+    font-family: font1;
+    src: url("font1.woff2") format(woff2);
+}
+@keyframes changeBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+body {
+    margin: 0;
+}
+
+header {
+    height: 75px;
+    box-shadow: 0 0px 11px 1px;
+    background: #b90000;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    direction: rtl;
+    margin-bottom: 10px;
+}
+.header-img1 {
+    width: 55px;
+    border-radius: 50px;
+    margin: 10px;
+}
+.header-span1 {
+    font-family: font1;
+    font-size: 14px;
+    color: white;
+}
+
+.span1, .span2, .span3 {
+    font-family: 'font1';
+    font-size: 13px;
+    color: #3b3b3b;
+    margin: 0 10px;
+}
+
+.mahsoolat, .nemoone-kar, .tamasbama {
+    background: #f9f9f9;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px 1px #8b8b8b;
+    border-right: 4px solid #b90000;
+    padding: 0 0 10px 0;
+}
+.mahsoolat-div1, .nemoone-kar-div1, .tamasbama-div1 {
+    display: flex;
+    direction: rtl;
+    justify-content: start;
+    align-items: center;
+    padding: 10px;
+}
+.mahsoolat-div1-span1, .nemoone-kar-div1-span1, .tamasbama-div1-span1 {
+    font-family: font1;
+    color: rgb(37, 37, 37);
+}
+.mahsoolat-div1-div1, .nemoone-kar-div1-div1, .tamasbama-div1-div1 {
+    background: #818181;
+    height: 0.05rem;
+    width: 70%;
+    margin: 0 12px;
+}
+
+.mahsoolat-div2 {
+    padding: 10px;
+    direction: rtl;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.mahsoolat-div2-mahsool {
+    padding: 5px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    transition: width 0.4s;
+    background: linear-gradient(to right, rgb(191 0 0 / 78%), #ad0000, rgb(129 0 0));
+    background-size: 400% 400%;
+    animation: changeBackground 4s infinite;
+    color: white;
+    text-decoration: none;
+    font-family: 'font1';
+    font-size: 14px;
+    border-radius: 7px;
+    margin: 4px 0;
+}
+
+.nemoone-kar-img1 {
+    width: 160px;
+    border-radius: 5px;
+    margin: 5px 8px;
+}
+.nemoone-kar-div2 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.nemoone-kar-div3 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+.nemoone-kar-div3-span1 {
+    direction: rtl;
+    font-family: font1;
+    margin: 0 18px;
+    color: #0043ff;
+}
+
+.tamasbama-div2 {
+    height: 20px;
+    background-color: none;
+    display: flex;
+    flex-direction: row;
+    direction: rtl;
+    margin: 0 8px;
+    padding: 6px;
+}

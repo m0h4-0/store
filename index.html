@@ -4,100 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>store</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        @font-face {
-            font-family: font1;
-            src: url("font1.woff2") format(woff2);
-        }
-        body {
-            margin: 0;
-        }
-        header {
-            height: 75px;
-            box-shadow: 0 0px 11px 1px;
-            background: #b90000;
-            display: flex;
-            align-items: center;
-            justify-content: start;
-            direction: rtl;
-            margin-bottom: 10px;
-        }
-        .header-img1 {
-            width: 55px;
-            border-radius: 50px;
-            margin: 10px;
-        }
-        .header-span1 {
-            font-family: font1;
-            font-size: 14px;
-            color: white;
-        }
-        .span1, .span2, .span3 {
-            font-family: 'font1';
-            font-size: 13px;
-            color: #3b3b3b;
-            margin: 0 10px;
-        }
-        .nemoone-kar, .tamasbama {
-            background: #f9f9f9;
-            margin: 10px;
-            border-radius: 8px;
-            box-shadow: 0 0 5px 1px #8b8b8b;
-            border-right: 4px solid #b90000;
-            padding: 0 0 10px 0;
-        }
-        .nemoone-kar-div1, .tamasbama-div1 {
-            display: flex;
-            direction: rtl;
-            justify-content: start;
-            align-items: center;
-            padding: 10px;
-        }
-        .nemoone-kar-div1-span1, .tamasbama-div1-span1 {
-            font-family: font1;
-            color: rgb(37, 37, 37);
-        }
-        .nemoone-kar-div1-div1, .tamasbama-div1-div1 {
-            background: #818181;
-            height: 0.05rem;
-            width: 70%;
-            margin: 0 12px;
-        }
-        .nemoone-kar-img1 {
-            width: 160px;
-            border-radius: 5px;
-            margin: 5px 8px;
-        }
-        .nemoone-kar-div2 {
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            display: flex;
-            flex-direction: row;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
             justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+            animation: fadeln 0.6s;
         }
-        .nemoone-kar-div3 {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            justify-content: end;
+        .overlay img {
+            max-width: 70%;
+            max-height: 70%;
+            border-radius: 10px;
+            box-shadow: 0 0 20px white;
+            transition: transform 0.5s ease;
+            transform: scale(0.8);
         }
-        .nemoone-kar-div3-span1 {
-            direction: rtl;
+        .overlay.show img {
+            transform: scale(1);
+        }
+        .close-btn {
+            position: fixed;
+            top: 50px;
+            right: 50px;
+            background: white;
+            border: none;
+            padding: 7px 17px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1001;
             font-family: font1;
-            margin: 0 18px;
-            color: #0043ff;
         }
-        .tamasbama-div2 {
-            height: 20px;
-            background-color: none;
-            display: flex;
-            flex-direction: row;
+        .overlay-span1 {
+            margin: 20px 0;
+            color: #9f9f9f9e;
+            font-family: 'font1';
+            font-size: 15px;
             direction: rtl;
-            margin: 0 8px;
-            padding: 6px;
+        }
+        @keyframes fadeln {
+            from {opacity: 0;}
+            to {opacity: 1;}
         }
     </style>
 </head>
 <body>
+    <div class="overlay" id="overlay">
+        <img id="overlayImg" src="">
+        <!--button class="close-btn" id="closeBtn">برگشت</button-->
+        <span class="overlay-span1">برای برگشت کلیک کنید .</span>
+    </div>
     <header>
         <img src="header-photo.jpg" class="header-img1">
         <span class="header-span1">دکوراسیون فلزی و چوبی کرمان</span>
@@ -107,13 +72,23 @@
         <span class="span2">خونت رو با ما خوشگل کن !</span>
         <span class="span3">ارسال به سراسر کشور .</span>
     </div>
+    <div class="mahsoolat">
+        <div class="mahsoolat-div1">
+            <span class="mahsoolat-div1-span1">محصولات</span>
+            <div class="mahsoolat-div1-div1" style="width: 73%;"></div>
+        </div>
+        <div class="mahsoolat-div2">
+            <a class="mahsoolat-div2-mahsool" href="miz-sandali.html">میز و صندلی</a>
+            <a class="mahsoolat-div2-mahsool" href="not_found_page.html">رگال</a>
+        </div>
+    </div>
     <div class="nemoone-kar">
         <div class="nemoone-kar-div1">
             <span class="nemoone-kar-div1-span1">نمونه کارها</span>
             <div class="nemoone-kar-div1-div1"></div>
         </div>
         <div class="nemoone-kar-div2">
-            <img src="nemoone1.jpg" class="nemoone-kar-img1">
+            <img src="nemoone1.jpg" class="nemoone-kar-img1" id="myImg">
             <img src="nemoone2.jpeg" class="nemoone-kar-img1">
         </div>
         <div class="nemoone-kar-div2">
@@ -156,5 +131,27 @@
             </div>
         </div>
     </div>
+    <script>
+        const allImages = document.querySelectorAll('img');
+        const overlay = document.getElementById('overlay');
+        const overlayImg = document.getElementById('overlayImg');
+        const closeBtn = document.getElementById('closeBtn');
+
+        allImages.forEach(img => {
+            img.addEventListener('click', function() {
+                overlay.style.display = 'flex';
+                overlayImg.src = this.src;
+                overlay.classList.add('show');
+            });
+        });
+        //closeBtn.addEventListener('click', function() {
+            //overlay.classList.remove('show');
+            //overlay.style.display = 'none';
+        //});
+        overlay.addEventListener('click', function() {
+            overlay.style.display = 'none';
+            overlay.classList.remove('show');
+        });
+    </script>
 </body>
 </html
