@@ -2,6 +2,18 @@
     font-family: font1;
     src: url("font1.woff2") format(woff2);
 }
+@font-face {
+    font-family: font2;
+    src: url("titr.woff2") format(woff2);
+}
+@font-face {
+    font-family: font3;
+    src: url("nazanin.woff2") format(woff2);
+}
+@font-face {
+    font-family: font4;
+    src: url("traffic.woff2") format(woff2);
+}
 @keyframes changeBackground {
     0% {
         background-position: 0% 50%;
@@ -43,6 +55,40 @@ header {
     font-size: 13px;
     color: #3b3b3b;
     margin: 0 10px;
+}
+
+.hailaits {
+    margin: 10px;
+    direction: rtl;
+    display: flex;
+    flex-direction: row;
+}
+.hailaits-1 {
+    display: flex;
+    padding: 3px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 0 6px;
+    flex-direction: column;
+}
+.hailaits-1-a {
+    display: flex;
+    border-radius: 60px;
+    padding: 3px;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(199 199 199);
+}
+.hailaits-img {
+    width: 58px;
+    height: 58px;
+    border-radius: 60px;
+}
+.hailaits-1-h1 {
+    font-family: 'font1';
+    font-size: 13px;
+    color: #505050;
+    margin: 2px 0;
 }
 
 .mahsoolat, .nemoone-kar, .tamasbama {
