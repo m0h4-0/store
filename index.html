@@ -6,63 +6,9 @@
     <title>store</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            flex-direction: column;
-            animation: fadeln 0.6s;
-        }
-        .overlay img {
-            max-width: 70%;
-            max-height: 70%;
-            border-radius: 10px;
-            box-shadow: 0 0 20px white;
-            transition: transform 0.5s ease;
-            transform: scale(0.8);
-        }
-        .overlay.show img {
-            transform: scale(1);
-        }
-        .close-btn {
-            position: fixed;
-            top: 50px;
-            right: 50px;
-            background: white;
-            border: none;
-            padding: 7px 17px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            z-index: 1001;
-            font-family: font1;
-        }
-        .overlay-span1 {
-            margin: 20px 0;
-            color: #9f9f9f9e;
-            font-family: 'font1';
-            font-size: 15px;
-            direction: rtl;
-        }
-        @keyframes fadeln {
-            from {opacity: 0;}
-            to {opacity: 1;}
-        }
     </style>
 </head>
 <body>
-    <div class="overlay" id="overlay">
-        <img id="overlayImg" src="">
-        <!--button class="close-btn" id="closeBtn">برگشت</button-->
-        <span class="overlay-span1">برای برگشت کلیک کنید .</span>
-    </div>
     <header>
         <img src="header-photo.jpg" class="header-img1">
         <span class="header-span1">دکوراسیون فلزی و چوبی کرمان</span>
@@ -74,19 +20,19 @@
     </div>
     <div class="hailaits">
         <div class="hailaits-1">
-            <a class="hailaits-1-a"><img class="hailaits-img" src="nemoone1.jpg"></a>
+            <button class="hailaits-1-a" onclick="openStory(allStories.story1)"><img class="hailaits-img" src="nemoone1.jpg"></button>
             <h1 class="hailaits-1-h1">ارتباط با ما</h1>
         </div>
         <div class="hailaits-1">
-            <a class="hailaits-1-a"><img class="hailaits-img" src="nemoone1.jpg"></a>
+            <button class="hailaits-1-a" onclick="openStory(allStories.story2)"><img class="hailaits-img" src="nemoone1.jpg"></button>
             <h1 class="hailaits-1-h1">رضایت های شما</h1>
         </div>
         <div class="hailaits-1" style="margin: 0 0 0 14px;">
-            <a class="hailaits-1-a"><img class="hailaits-img" src="nemoone1.jpg"></a>
+            <button class="hailaits-1-a" onclick="openStory(allStories.story3)"><img class="hailaits-img" src="nemoone1.jpg"></button>
             <h1 class="hailaits-1-h1">کارگاه</h1>
         </div>
         <div class="hailaits-1">
-            <a class="hailaits-1-a"><img class="hailaits-img" src="nemoone1.jpg"></a>
+            <button class="hailaits-1-a" onclick="openStory(allStories.story4)"><img class="hailaits-img" src="nemoone1.jpg"></button>
             <h1 class="hailaits-1-h1">واریزی ها</h1>
         </div>
     </div>
@@ -162,6 +108,24 @@
             </div>
         </div>
     </div>
+    <div class="overlay" id="overlay">
+        <img id="overlayImg" src="">
+        <!--button class="close-btn" id="closeBtn">برگشت</button-->
+        <span class="overlay-span1">برای برگشت کلیک کنید .</span>
+    </div>
+    <div class="story-container" id="storyContainer">
+        <div class="story-strip" id="storyStrip"></div>
+        <div class="story-header">
+            <button onclick="closeStory()" class="story-header-back"><</button>
+            <img src="nemoone1.jpg" alt="پروفایل">
+            <span style="font-family: 'font4'; margin: 0 5px;" id="storyName">نام کاربر</span>
+        </div>
+        <div class="story-image">
+            <img id="storyImage" src="">
+            <div class="story-click left-click" onclick="prevStory()"></div>
+            <div class="story-click right-click" onclick="nextStory()"></div>
+        </div>
+    </div>
     <script>
         const allImages = document.querySelectorAll('.nemoone-kar-img1');
         const overlay = document.getElementById('overlay');
@@ -183,6 +147,67 @@
             overlay.style.display = 'none';
             overlay.classList.remove('show');
         });
+    </script>
+    <script>
+        const allStories = {
+            story1: [
+                { name: "ارتباط با ما", image: "nemoone1.jpeg" },
+                { name: "ارتباط با ما", image: "nemoone1.jpeg" },
+                { name: "ارتباط با ما", image: "nemoone1.jpeg" }
+            ],
+            story2: [
+                { name: "رضایت های شما", image: "nemoone1.jpeg" },
+                { name: "رضایت های شما", image: "nemoone1.jpeg" }
+            ],
+            story3: [
+                { name: "کارگاه", image: "nemoone1.jpeg" },
+                { name: "کارگاه", image: "nemoone1.jpeg" }
+            ],
+            story4: [
+                { name: "واریزی ها", image: "nemoone1.jpeg" },
+                { name: "واریزی ها", image: "nemoone1.jpeg" },
+                { name: "واریزی ها", image: "nemoone1.jpeg" },
+                { name: "واریزی ها", image: "nemoone1.jpeg" }
+            ]
+        };
+        let current = 0;
+        
+        function openStory(storyList) {
+            stories = storyList;
+            current = 0;
+            document.getElementById("storyContainer").style.display = "block";
+            renderStory();
+        }
+        function renderStory() {
+            document.getElementById("storyImage").src = stories[current].image;
+            document.getElementById("storyName").innerText = stories[current].name;
+        
+            const strip = document.getElementById("storyStrip");
+            strip.innerHTML = "";
+            stories.forEach((_, index) => {
+                const div = document.createElement("div");
+                if (index === current) div.classList.add("active");
+                strip.appendChild(div);
+            });
+        }
+        function nextStory() {
+            if (current <stories.length - 1) {
+                current++;
+                renderStory();
+            } else {
+                closeStory();
+            }
+        }
+        function prevStory() {
+            if (current > 0) {
+                current--;
+                renderStory();
+            }
+        }
+        function closeStory() {
+            document.getElementById("storyContainer").style.display = "none";
+            current = 0;
+        }
     </script>
 </body>
 </html
