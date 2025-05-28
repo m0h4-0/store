@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>a</title>
+    <link rel="stylesheet" href="static/style/style.css">
+    <style>
+        .where {
+            background: #f9f9f9;
+            box-shadow: 0 0 0px #dddddd;
+            border: 1px solid #c9c9c9;
+            border-radius: 10px;
+            height: 40px;
+            margin: 85px 10px 5px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
+        .where-back {
+            width: 50%;
+            display: flex;
+            justify-content: start;
+        }
+        .where-back-a {
+            direction: rtl;
+            font-family: 'font3';
+            color: #001fff;
+            text-decoration: none;
+            padding: 0 5px;
+        }
+        .where-text {
+            width: 50%;
+            display: flex;
+            justify-content: start;
+            font-family: font1;
+            direction: rtl;
+            font-size: 15px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 12px 10px;
+            padding: 8px 0;
+            text-align: start;
+        }
+        .note {
+            font-size: 14px;
+            margin: 10px 2px 14px 0;
+            font-family: 'font1';
+            color: #a1a1a1;
+            direction: rtl;
+        }
+        .gallery {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2px;
+        }
+        .gallery img {
+          width: 100%;
+          aspect-ratio: 1 / 1;
+          object-fit: fill;
+          cursor: pointer;
+          transition: transform 0.3s;
+        }
+        .gallery img:hover {
+          transform: scale(1.03);
+        }
+        .overlay {
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(0, 0, 0, 0.5);
+          backdrop-filter: blur(3px);
+          display: none;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+        }
+        .modal {
+          background: white;
+          padding: 20px;
+          border-radius: 10px;
+          max-width: 400px;
+          width: 60%;
+          text-align: right;
+          position: relative;
+        }
+        .modal img {
+          width: 100%;
+          border-radius: 8px;
+          margin-bottom: 15px;
+        }
+        .close-btn {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          background: #ffffff;
+          color: rgb(207, 0, 0);
+          border: none;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          cursor: pointer;
+          font-size: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        /*@media(max-width: 768px) {
+          .gallery {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        @media(max-width: 500px) {
+          .gallery {
+            grid-template-columns: 1fr;
+          }
+        }*/
+    </style>
+</head>
+<body>
+    <header>
+        <img src="static/imgs/header-photo.jpg" class="header-img1">
+        <span class="header-span1">دکوراسیون فلزی و چوبی کرمان</span>
+    </header>
+    <div class="where">
+        <div class="where-back">
+            <a href="./index.html" class="where-back-a">برگشت &gt;</a>
+        </div>
+        <div class="where-text">خانه > میز و صندلی</div>
+    </div>
+    <div class="container">
+        <div class="note">- تصاویر (برای مشاهده جزئیات محصول روی عکس کلیک کنید)</div>
+        <div class="gallery" id="gallery">
+            <img src="static/imgs/tools/101.jpg" data-id="1" alt="محصول 1" class="galleryimgs">
+            <img src="static/imgs/tools/102.jpg" data-id="2" alt="محصول 2" class="galleryimgs">
+            <img src="static/imgs/tools/103.jpg" data-id="3" alt="محصول 3" class="galleryimgs">
+            <img src="static/imgs/tools/104.jpg" data-id="4" alt="محصول 4" class="galleryimgs">
+            <img src="static/imgs/tools/105.jpg" data-id="5" alt="محصول 5" class="galleryimgs">
+            <img src="static/imgs/tools/106.jpg" data-id="6" alt="محصول 6" class="galleryimgs">
+            <img src="static/imgs/tools/107.jpg" data-id="7" alt="محصول 1" class="galleryimgs">
+        </div>
+    </div>
+    <div class="overlay" id="overlay">
+        <div class="modal">
+            <button class="close-btn" id="closeBtn">&times;</button>
+            <img id="modalImg" src="" alt="">
+            <h3 style="font-family: font1;" id="modalName"></h3>
+            <p style="margin: 0 0 5px 0; font-family: 'font1'; font-size: 12px; color: gray;" id="modalDesc"></p>
+            <div style="direction: rtl;"><small style="font-family: 'font1'; font-size: 12px; color: gray;" id="modalCode"></small></div>
+            <div style="direction: rtl;"><span style="font-family: 'font1'; font-size: 12px; color: gray;">خرید : ارسال کد یا عکس محصول به شماره ی 09071795672</span><a href="sms:09051795672" style="background: red;color: white;font-family: 'font1';font-size: 9px;padding: 4px 8px;border-radius: 15px;margin: 0 6px;">ارسال سریع</a></div>
+        </div>
+    </div>
+    <script>
+        const data = {
+          1: { name: "میز", desc: "نکته : این محصول بدون صندلی است", code: "1001" },
+          2: { name: "صندلی", desc: "بدون توضیحات", code: "1002" },
+          3: { name: "میز", desc: "بدون توضیحات", code: "1003" },
+          4: { name: "میز", desc: "بدون توضیحات", code: "1004" },
+          5: { name: "ست میز و صندلی", desc: "بدون توضیحات", code: "1005" },
+          6: { name: "میز", desc: "بدون توضیحات", code: "1006" },
+          7: { name: "ست میز و صندلی", desc: "بدون توضیحات", code: "1007" },
+        };
+      
+        const gallery = document.getElementById("gallery");
+        const overlay = document.getElementById("overlay");
+        const modalImg = document.getElementById("modalImg");
+        const modalName = document.getElementById("modalName");
+        const modalDesc = document.getElementById("modalDesc");
+        const modalCode = document.getElementById("modalCode");
+        const closeBtn = document.getElementById("closeBtn");
+
+        gallery.addEventListener("click", (e) => {
+          if (e.target.tagName === "IMG") {
+            const id = e.target.dataset.id;
+            const info = data[id];
+            modalImg.src = e.target.src;
+            modalName.textContent = info.name;
+            modalDesc.textContent = info.desc;
+            modalCode.textContent = "کد محصول : " + info.code;
+            overlay.style.display = "flex";
+          }
+        });
+      
+        closeBtn.addEventListener("click", () => {
+          overlay.style.display = "none";
+        });
+      
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) {
+            overlay.style.display = "none";
+          }
+        });
+    </script>
+</body>
+</html>
