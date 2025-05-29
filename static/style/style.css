@@ -43,6 +43,20 @@ header {
     left: 0;
     width: 100%;
 }
+.creator {
+    height: 35px;
+    transition: width 0.4s;
+    background: linear-gradient(to right, rgb(181 0 0), #cf0000, rgb(102 0 0));
+    background-size: 400% 400%;
+    animation: changeBackground 2.5s infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'font1';
+    color: white;
+    font-size: 11px;
+    direction: rtl;
+}
 .header-img1 {
     width: 55px;
     border-radius: 50px;
